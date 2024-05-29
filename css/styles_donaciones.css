@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+.header-content {
+    display: flex; /* Usar flexbox para alinear elementos */
+    align-items: center; /* Centrar los elementos verticalmente */
+}
+header img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+
+section img {
+    display: block;
+    margin:0 auto;
+    width: 500px;
+    height: auto;
+}
+nav {
+    background-color: #666;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+section {
+    padding: 20px;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+}
+
+.content_4{
+    width: 80%; /* Ancho del contenedor, ajustable según tus necesidades */
+    margin: 0 auto; /* Márgenes automáticos para centrar el contenedor */
+}
+
+.navigator{
+    position: absolute;
+    right: 50px;
+    top: 35px;
+}
+
+.navigator input[type="search"]{
+    padding: 5px;
+    font: size 16px;
+}
+
+.navigator button{
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
