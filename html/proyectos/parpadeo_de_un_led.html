@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parpadeo de unn LED</title>
+    <link rel="stylesheet" href="../../css/proyectos/styles_termometro.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../../images/logo.png" alt="Descripción de la imagen">
+            <h1>ALV Electronics</h1>
+        </div>
+    </header>
+    <nav>
+        <a href="../index.html">Inicio</a>
+        <a href="../conceptos.html">Fundamentación teórica</a>
+        <a href="../proyectos.html">Proyectos electronicos</a>
+        <a href="../servicios.html">Nuestros Servicios</a>
+        <a href="../descargas.html">Descargas</a>
+        <a href="../donaciones.html">Donaciones</a>
+    </nav>
+    <section>
+      <div class="contenedor">
+        <h2 id="titulo">Parpadeo de un LED</h2>
+        <h2 id="subtitulo">Descripción</h2>
+        <p id="texto_1">El parpadeo de un LED con Arduino Uno implica escribir un programa simple que alternará entre encender y apagar un pin digital conectado al LED. Esto se logra utilizando la función digitalWrite() para establecer el estado del pin como HIGH (encendido) o LOW (apagado), y la función delay() para controlar la duración de cada estado.</p>
+        <h3>Materiales necesarios:</h3>
+        <ul>
+          <li>Arduino Uno (u otra placa compatible)</li>
+          <li>LED</li>
+          <li>Resistencia de 220 ohmios</li>
+          <li>Protoboard y cables de conexión</li>
+        </ul>
+        <h3>Instrucciones:</h3>
+          <ol>
+             <li>Conecta el LED a Arduino Uno: el lado largo del LED (ánodo) va al pin digital 13 y el lado corto (cátodo) a tierra (GND) a través de una resistencia de 220 ohmios.</li>
+             <li>Conecta Arduino Uno a tu computadora usando un cable USB.</li>
+             <li>Abre el software Arduino IDE en tu computadora</li>
+             <li>Escribe el siguiente código en Arduino IDE y cargale</li>
+             <li>Disfruta de tu primer programa</li>
+          </ol>
+          <h3>Esquema de conexión</h3>
+          <img src="../../images/esquema_parpadeo.png"> 
+          <h3>Código de Ejemplo (para Arduino IDE):</h3>
+          <div class="container">
+          <div class="controls">
+            <button onclick="copyCode()">Copiar</button>
+          </div>
+          <div class="code-container">
+            <div class="message" id="message">Copied</div>
+            <pre id="code-block" class="line-numbers"><code class="language-c" style="color: black;">
+/*
+  Creado: Luis  Alvarez (edualv1723@gmail.com)
+  https://alvelectronics.com
+*/
+const int ledPin = 13; //Asigna el numero de pin a la variable ledPin
+
+void setup() {
+  pinMode(ledPin, OUTPUT);  //Establece al pin 13  como salida
+}
+
+void loop() {
+  digitalWrite(ledPin, HIGH);  //Pone en estado Alto al led
+  delay(1000);                 //Pausa de 1 segundo
+  digitalWrite(ledPin, LOW);   //Pone en estado Bajo al led
+  delay(1000);                 //Pausa de 1 segundo
+}
+
+      </code></pre>
+          </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script>
+           function copyCode() {
+                var codeBlock = document.getElementById('code-block').innerText;
+                navigator.clipboard.writeText(codeBlock).then(function() {
+                  showMessage();
+                }, function() {
+                  alert('Error al copiar el código');
+                });
+              }
+              function showMessage() {
+                var message = document.getElementById('message');
+                message.classList.add('show-message');
+                setTimeout(function() {
+                  message.classList.remove('show-message');
+                }, 1000);
+              } 
+      
+        </script>
+      </div>
+    </section>
+    <footer>
+        <p>Derechos de autor © 2024 - Luis Alvarez</p>
+    </footer>
+    <a href="https://wa.link/epa3e7" class="whatsapp-button" target="_blank">
+      <img src="../../images/boton_whatsapp.png" alt="Whatsapp">
+    </a>
+    <script src="js/script.js"></script> <!-- Asegúrate que la ruta refleja la estructura de carpetas -->
+</body>
+</html>

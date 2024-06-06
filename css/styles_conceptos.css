@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+.header-content {
+    display: flex; /* Usar flexbox para alinear elementos */
+    align-items: center; /* Centrar los elementos verticalmente */
+}
+header img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+
+section img {
+    display: block;
+    margin:0 auto;
+    width: 500px;
+    height: auto;
+}
+nav {
+    background-color: #666;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+section {
+    padding: 20px;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+}
+
+.content_1{
+    width: 80%; /* Ancho del contenedor, ajustable según tus necesidades */
+    margin: 0 auto; /* Márgenes automáticos para centrar el contenedor */
+}
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.whatsapp-button img {
+    width: 70px;
+    height: 70px;
+}
+
+.whatsapp-button:hover {
+    background-color: #1ebe5b;
+}

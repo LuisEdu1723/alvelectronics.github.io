@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luces Auto Fantastico</title>
+    <link rel="stylesheet" href="../../css/proyectos/styles_termometro.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../../images/logo.png" alt="Descripción de la imagen">
+            <h1>ALV Electronics</h1>
+        </div>
+    </header>
+    <nav>
+        <a href="../index.html">Inicio</a>
+        <a href="../conceptos.html">Fundamentación teórica</a>
+        <a href="../proyectos.html">Proyectos electronicos</a>
+        <a href="../servicios.html">Nuestros Servicios</a>
+        <a href="../descargas.html">Descargas</a>
+        <a href="../donaciones.html">Donaciones</a>
+    </nav>
+    <section>
+      <div class="contenedor">
+        <h2 id="titulo">Luces auto fantastico</h2>
+        <h2 id="subtitulo">Descripción</h2>
+        <p id="texto_1">Las luces del Auto Fantástico, controladas por Arduino, deslumbran con una secuencia brillante y futurista, iluminando su paso con destellos dinámicos y cautivadores.</p>
+        <h3>Materiales necesarios:</h3>
+        <ul>
+          <li>Arduino Uno (u otra placa compatible)</li>
+          <li>LEDs rojos individuales</li>
+          <li>Resistencias (para limitar la corriente de cada LED)</li>
+          <li>Protoboard (placa de pruebas)</li>
+          <li>Cableado (cables jumper, cables de conexión)</li>
+          <li>Fuente de alimentación para el Arduino</li>
+        </ul>
+        <h3>Instrucciones:</h3>
+          <ol>
+             <li>Conecta los LEDs rojos a la placa protoboard, asegurándote de colocar una resistencia en serie con cada LED para limitar la corriente.</li>
+             <li>Conecta los cables de los LEDs a los pines de salida digital de la placa Arduino.</li>
+             <li>Conecta la fuente de alimentación a la placa Arduino y a los LEDs.</li>
+             <li>Carga el siguiente código en la placa Arduino y disfrutalo</li>
+          </ol>
+          <h3>Esquema de conexión</h3>
+          <img src="../../images/esquema_luces_auto_fantastico.png"> 
+          <h3>Código de Ejemplo (para Arduino IDE):</h3>
+          <div class="container">
+          <div class="controls">
+            <button onclick="copyCode()">Copiar</button>
+          </div>
+          <div class="code-container">
+            <div class="message" id="message">Copied</div>
+            <pre id="code-block" class="line-numbers"><code class="language-c" style="color: black;">
+/*
+  Creado: Luis  Alvarez (edualv1723@gmail.com)
+  https://alvelectronics.com
+*/
+// Definición de pines
+#define NUM_LEDS 10
+int ledPins[NUM_LEDS] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11}; // Cambia los pines según tu configuración
+
+// Tiempo de espera entre cada paso de la secuencia
+#define DELAY_TIME 100 // Ajusta según tu preferencia
+
+// Patrones de secuencia de luz
+int patterns[][NUM_LEDS] = {
+  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // Secuencia 1
+  {1, 1, 0, 0, 0, 0, 0, 0, 0, 0}, // Secuencia 2
+  {1, 1, 1, 0, 0, 0, 0, 0, 0, 0}, // Secuencia 3
+  {1, 1, 1, 1, 0, 0, 0, 0, 0, 0}, // Secuencia 4
+  {1, 1, 1, 1, 1, 0, 0, 0, 0, 0}, // Secuencia 5
+  {1, 1, 1, 1, 1, 1, 0, 0, 0, 0}, // Secuencia 6
+  {1, 1, 1, 1, 1, 1, 1, 0, 0, 0}, // Secuencia 7
+  {1, 1, 1, 1, 1, 1, 1, 1, 0, 0}, // Secuencia 8
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 0}, // Secuencia 9
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}  // Secuencia 10
+};
+
+void setup() {
+  // Configura los pines de los LEDs como salidas
+  for (int i = 0; i &lt; NUM_LEDS; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  // Ejecuta cada secuencia de patrones
+  for (int patternIndex = 0; patternIndex &lt; sizeof(patterns) / sizeof(patterns[0]); patternIndex++) {
+    for (int step = 0; step &lt; NUM_LEDS; step++) {
+      // Activa los LEDs según el patrón de secuencia actual
+      for (int ledIndex = 0; ledIndex &lt; NUM_LEDS; ledIndex++) {
+        digitalWrite(ledPins[ledIndex], patterns[patternIndex][(ledIndex + step) % NUM_LEDS]);
+      }
+      delay(DELAY_TIME);
+    }
+  }
+}
+
+      </code></pre>
+          </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script>
+           function copyCode() {
+                var codeBlock = document.getElementById('code-block').innerText;
+                navigator.clipboard.writeText(codeBlock).then(function() {
+                  showMessage();
+                }, function() {
+                  alert('Error al copiar el código');
+                });
+              }
+              function showMessage() {
+                var message = document.getElementById('message');
+                message.classList.add('show-message');
+                setTimeout(function() {
+                  message.classList.remove('show-message');
+                }, 1000);
+              } 
+      
+        </script>
+      </div>
+    </section>
+    <footer>
+        <p>Derechos de autor © 2024 - Luis Alvarez</p>
+    </footer>
+    <a href="https://wa.link/epa3e7" class="whatsapp-button" target="_blank">
+      <img src="../../images/boton_whatsapp.png" alt="Whatsapp">
+    </a>
+    <script src="js/script.js"></script> <!-- Asegúrate que la ruta refleja la estructura de carpetas -->
+</body>
+</html>
