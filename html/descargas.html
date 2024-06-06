@@ -192,13 +192,9 @@
     </a>
 
     <script>
-        function recaptchaCallback(){
-            document.getElementById('download-button').disabled = false;
-        }
-
-        function onSubmit(token){
-            document.getElementById("download-form").submit();
-        }
+        function onSubmit(token) {
+        // Aquí puedes manejar el evento después de que el usuario haya pasado el reCAPTCHA
+        return true; // Permite la sumisión del formulario
     </script>
 </body>
 
