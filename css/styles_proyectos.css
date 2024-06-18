@@ -1,0 +1,346 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    margin-top: 0px; /* Ajusta esto según la altura de tu barra de navegación */
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    justify-content: flex-start;
+}
+
+.header-content {
+    display: flex; /* Usar flexbox para alinear elementos */
+    align-items: center; /* Centrar los elementos verticalmente */
+    padding: 10px;
+}
+
+
+header img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+
+section img {
+    display: block;
+    margin: 0 auto;
+    width: 500px;
+    height: auto;
+}
+
+.nav-list {
+    list-style-type: none;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.nav-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0px;
+    display: flex;
+}
+
+.nav-list li {
+    margin: 2px;
+}
+
+.nav-list a {
+    display: block;
+    padding: 20px 30px;
+    color: white;
+    text-decoration: none;
+    background-color: #333;
+    transition: background-color 0.3s;
+}
+
+.nav-list a.inicio {
+    background-color: blue;
+}
+
+.nav-list a:hover {
+    background-color: #555;
+}
+
+section {
+    padding: 30px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+}
+
+.content_3 {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.menu {
+    width: 100%;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        position:relative;
+        top: auto;
+        margin: 0% 0%;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        align-items: flex-start;
+        margin: 1% 0%;
+    
+    }
+
+    .nav-list li {
+        width: 82%;
+        margin: 0.5% 0;
+    }
+
+    .nav-list a{
+        width: 100%;
+        text-align: left;
+        padding-left: 15px;
+    }
+
+    .menu a {
+        border-radius: 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+   /* .menu a::after {
+        content: ' \002B';
+        margin-left: auto;
+    }*/
+
+    .nav-list li:first-child a {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+
+    .nav-list li:last-child a {
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .content_3 {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .section {
+        padding: 100px;
+    }
+    
+    body {
+        margin-top: 0;
+    }
+}
+
+#titulo {
+    text-align: center;
+}
+
+.arduino {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    padding: 1px;
+}
+
+.con-punto {
+    margin-right: 10px; /* Espacio después del título "Arduino:" */
+}
+
+.con-punto::before {
+    content: "• ";
+    margin-right: 5px;
+}
+
+.texto_1 {
+    margin: 0;
+    flex-grow: 1; /* Permite que el párrafo ocupe el espacio restante */
+}
+
+@media (max-width: 600px) {
+    .arduino {
+        font-size: 16px; /* Reduce el tamaño de la fuente en ventanas más pequeñas */
+        flex-wrap: wrap; /* Permite que los elementos se ajusten en nuevas líneas si no hay suficiente espacio */
+    }
+}
+
+.parpadeo-de-un-led{
+    text-decoration: none;
+}
+
+.parpadeo-de-un-led::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+
+.barrido-led{
+    text-decoration: none;
+}
+.barrido-led::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+
+.luces-auto-fantastico{
+    text-decoration: none;
+}
+
+.luces-auto-fantastico::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+
+.led-rgb{
+    text-decoration: none;
+}
+
+.led-rgb::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px; 
+}
+
+.termometro-digital{
+    text-decoration: none;
+}
+.termometro-digital::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px; 
+}
+
+.voltimetro-digital{
+    text-decoration: none;
+}
+.voltimetro-digital::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+
+.contador-0-9{
+    text-decoration: none;
+}
+.contador-0-9::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+
+.hola-mundo::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+.esp32_titulo{
+    margin-right: 10px; /* Espacio después del título "Arduino:" */
+}
+.esp32_titulo::before{
+    content: "• ";
+    margin-right: 5px;
+}
+
+.texto_2 {
+    margin: 0;
+    flex-grow: 1; /* Permite que el párrafo ocupe el espacio restante */
+}
+.control-led-wifi::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+.sensor-dh11::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+.control-led-rgb-wifi::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+.dimmer-wifi::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+.control-acceso-wifi::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+.servomotor-wifi::before{
+    content: "• ";
+    margin-right: 5px;
+    margin-left: 30px;
+}
+
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #085807;
+    color: white;
+    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.whatsapp-button img {
+    width: 70px;
+    height: 70px;
+}
+
+.whatsapp-button:hover {
+    background-color: #1ebe5b;
+}
+
+.nav-list li:first-child a {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.nav-list li:last-child a {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
