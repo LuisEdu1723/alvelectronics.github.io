@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de tu página</title>
+    <link rel="stylesheet" href="../../css/proyectos/styles_termometro.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../../images/logo.png" alt="Descripción de la imagen" style="height: 100px;width: auto;">
+        </div>
+    </header>
+    <nav class="menu">
+      <ul class="nav-list">                  
+          <li><a href="../../index.html" class="inicio">INICIO</a></li>
+          <li><a href="../conceptos.html" class="conceptos">BLOGS</a></li>
+          <li><a href="../proyectos.html" class="proyectos">PROYECTOS</a></li>
+          <li> <a href="../servicios.html" class="servicios">SERVICIOS</a></li>
+          <li><a href="../descargas.html" class="descargas">DESCARGAS</a></li>
+          <li><a href="../donaciones.html" class="donaciones">DONACIONES</a></li>
+      </ul>
+  </nav>
+    <section>
+      <div class="contenedor">
+        <h2 id="titulo">Termómetro Digital con Arduino</h2>
+        <h2 id="subtitulo">Descripción</h2>
+        <p id="texto_1">El proyecto consiste en crear un termómetro digital utilizando un sensor de temperatura y un Arduino. Mostrará la temperatura ambiente actual en grados Celsius en una pantalla LCD. Este proyecto es ideal para principiantes en la electrónica y la programación.</p>
+        <h3>Materiales necesarios:</h3>
+        <ul>
+          <li>Arduino Uno (u otra placa compatible)</li>
+          <li>Sensor de temperatura (por ejemplo, el DS18B20)</li>
+          <li>Pantalla LCD 16x2 con interfaz I2C</li>
+          <li>Resistencia de 4.7k ohmios (para el sensor de temperatura)</li>
+          <li>Protoboard y cables de conexión</li>
+          <li>Potenciómetro (para ajustar el contraste del LCD)</li>
+          <li>Fuente de alimentación para el Arduino</li>
+        </ul>
+        <h3>Instrucciones:</h3>
+          <ol>
+             <li>Conectar el sensor de temperatura al Arduino según el esquema de conexión.</li>
+             <li>Conectar la pantalla LCD al Arduino utilizando el protocolo I2C.</li>
+             <li>Programar el Arduino para leer la temperatura del sensor y mostrarla en la pantalla LCD.</li>
+             <li>Ajustar el contraste de la pantalla LCD con el potenciómetro.</li>
+             <li>Montar todos los componentes en la protoboard de manera ordenada.</li>
+             <li>Alimentar el Arduino y observar la temperatura mostrada en la pantalla LCD.</li>
+          </ol>
+          <h3>Esquema de conexión</h3>
+          <img src="../../images/esquema_temperatura.png"> 
+          <h3>Código de Ejemplo (para Arduino IDE):</h3>
+          <div class="container">
+          <div class="controls">
+            <button onclick="copyCode()">Copiar</button>
+          </div>
+          <div class="code-container">
+            <div class="message" id="message">Copied</div>
+            <pre id="code-block" class="line-numbers"><code class="language-c" style="color: black;">
+/*
+  Creado: Luis  Alvarez (edualv1723@gmail.com)
+  https://alvelectronics.com
+*/
+
+#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal_I2C.h&gt;
+#include &lt;OneWire.h&gt;
+#include &lt;DallasTemperature.h&gt;
+  
+#define ONE_WIRE_BUS 2
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+  
+void setup() {
+    lcd.init();
+    lcd.backlight();
+    sensors.begin();
+}
+  
+void loop() {
+    sensors.requestTemperatures();
+    float tempC = sensors.getTempCByIndex(0);
+    
+    lcd.setCursor(0, 0);
+    lcd.print("Temp: ");
+    lcd.print(tempC);
+    lcd.print(" C");
+    
+    delay(1000);
+}
+      </code></pre>
+          </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script>
+           function copyCode() {
+                var codeBlock = document.getElementById('code-block').innerText;
+                navigator.clipboard.writeText(codeBlock).then(function() {
+                  showMessage();
+                }, function() {
+                  alert('Error al copiar el código');
+                });
+              }
+              function showMessage() {
+                var message = document.getElementById('message');
+                message.classList.add('show-message');
+                setTimeout(function() {
+                  message.classList.remove('show-message');
+                }, 1000);
+              } 
+      
+        </script>
+      </div>
+    </section>
+    <footer>
+        <p>Derechos de autor © 2024 - Luis Alvarez</p>
+    </footer>
+    <a href="https://wa.link/epa3e7" class="whatsapp-button" target="_blank">
+      <img src="../../images/boton_whatsapp.png" alt="Whatsapp">
+    </a>
+    <script src="js/script.js"></script> <!-- Asegúrate que la ruta refleja la estructura de carpetas -->
+</body>
+</html>
