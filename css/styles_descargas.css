@@ -430,3 +430,45 @@ footer {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
+.descargas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.descarga-card {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.descarga-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.descarga-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.proyecto-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.proyecto-link img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
