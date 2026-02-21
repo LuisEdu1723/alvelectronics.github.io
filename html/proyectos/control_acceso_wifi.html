@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de tu página</title>
+    <link rel="stylesheet" href="../../css/proyectos/styles_termometro.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../../images/logo.png" alt="Descripción de la imagen" style="height: 100px;width: auto;">
+        </div>
+    </header>
+    <nav class="menu">
+      <ul class="nav-list">                  
+          <li><a href="../../index.html" class="inicio">INICIO</a></li>
+          <li><a href="../conceptos.html" class="conceptos">BLOGS</a></li>
+          <li><a href="../proyectos.html" class="proyectos">PROYECTOS</a></li>
+          <li> <a href="../servicios.html" class="servicios">SERVICIOS</a></li>
+          <li><a href="../descargas.html" class="descargas">DESCARGAS</a></li>
+          <li><a href="../donaciones.html" class="donaciones">DONACIONES</a></li>
+      </ul>
+  </nav>
+    <section>
+      <div class="contenedor">
+        <h2 id="titulo">Control de Acceso por Wifi</h2>
+        <h2 id="subtitulo">Descripción</h2>
+        <p id="texto_1">Este proyecto utiliza un Arduino para controlar el acceso a un sistema a través de Wifi. Permite gestionar dispositivos conectados de forma remota y segura.</p>
+        <h3>Materiales necesarios:</h3>
+        <ul>
+          <li>Módulo Wifi ESP32</li>
+          <li>1 LED</li>
+          <li>1 resistencia de 220 ohmios (o el valor adecuado para el LED que utilices)</li>
+          <li>Protoboard y cables de conexión</li>
+        </ul>
+        <h3>Instrucciones:</h3>
+          <ol>
+             <li>Conecta el LED al pin GPIO2 de la protoboard.</li>
+             <li>Conecta el cátodo del LED a tierra (GND) a través de la resistencia.</li>
+             <li>Carga el código en el ESP32.</li>
+             <li>Observa cómo el LED se enciende y apaga.</li>
+          </ol>
+          <h3>Esquema de conexión</h3>
+          <img src="../../images/esquema_control_wifi.png"> 
+          <h3>Código de Ejemplo (para Arduino IDE):</h3>
+          <div class="container">
+          <div class="controls">
+            <button onclick="copyCode()">Copiar</button>
+          </div>
+          <div class="code-container">
+            <div class="message" id="message">Copied</div>
+            <pre id="code-block" class="line-numbers"><code class="language-c" style="color: black;">
+/*
+  Creado: Luis  Alvarez (edualv1723@gmail.com)
+  https://alvelectronics.com
+*/
+
+#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+
+// Credenciales WiFi (Wokwi las ignora, pero son necesarias)
+const char* ssid = "ESP32-Control";
+const char* password = "12345678";
+
+// Clave de acceso
+const String claveCorrecta = "admin123";
+
+WebServer server(80);
+
+#define LED_PIN 2
+
+// Página principal
+void handleRoot() {
+  String html = "<!DOCTYPE html><html>";
+  html += "<head><title>Control de Acceso</title></head>";
+  html += "<body>";
+  html += "<h2>Control de Acceso WiFi</h2>";
+  html += "<form action='/login' method='POST'>";
+  html += "Clave: <input type='password' name='clave'>";
+  html += "<input type='submit' value='Ingresar'>";
+  html += "</form>";
+  html += "</body></html>";
+  server.send(200, "text/html", html);
+}
+
+// Verificación de clave
+void handleLogin() {
+  if (server.hasArg("clave")) {
+    String claveIngresada = server.arg("clave");
+
+    if (claveIngresada == claveCorrecta) {
+      digitalWrite(LED_PIN, HIGH);
+      server.send(200, "text/html", "<h2>Acceso Permitido</h2><a href='/'>Volver</a>");
+    } else {
+      server.send(403, "text/html", "<h2>Acceso Denegado</h2><a href='/'>Intentar</a>");
+    }
+  }
+}
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
+
+  Serial.begin(115200);
+
+  WiFi.begin(ssid, password);
+  Serial.println("Conectando WiFi...");
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("\nWiFi conectado");
+  Serial.println(WiFi.localIP());
+
+  server.on("/", handleRoot);
+  server.on("/login", HTTP_POST, handleLogin);
+
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+}
+
+
+      </code></pre>
+          </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script>
+           function copyCode() {
+                var codeBlock = document.getElementById('code-block').innerText;
+                navigator.clipboard.writeText(codeBlock).then(function() {
+                  showMessage();
+                }, function() {
+                  alert('Error al copiar el código');
+                });
+              }
+              function showMessage() {
+                var message = document.getElementById('message');
+                message.classList.add('show-message');
+                setTimeout(function() {
+                  message.classList.remove('show-message');
+                }, 1000);
+              } 
+      
+        </script>
+      </div>
+    </section>
+    <footer>
+        <p>Derechos de autor © 2024 - Luis Alvarez</p>
+    </footer>
+    <a href="https://wa.link/epa3e7" class="whatsapp-button" target="_blank">
+      <img src="../../images/boton_whatsapp.png" alt="Whatsapp">
+    </a>
+    <script src="js/script.js"></script> <!-- Asegúrate que la ruta refleja la estructura de carpetas -->
+</body>
+</html>

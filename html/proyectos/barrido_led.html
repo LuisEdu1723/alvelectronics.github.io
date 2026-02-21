@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de tu página</title>
+    <link rel="stylesheet" href="../../css/proyectos/styles_termometro.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../../images/logo.png" alt="Descripción de la imagen" style="height: 100px;width: auto;">
+        </div>
+    </header>
+    <nav class="menu">
+      <ul class="nav-list">                  
+          <li><a href="../../index.html" class="inicio">INICIO</a></li>
+          <li><a href="../conceptos.html" class="conceptos">BLOGS</a></li>
+          <li><a href="../proyectos.html" class="proyectos">PROYECTOS</a></li>
+          <li> <a href="../servicios.html" class="servicios">SERVICIOS</a></li>
+          <li><a href="../descargas.html" class="descargas">DESCARGAS</a></li>
+          <li><a href="../donaciones.html" class="donaciones">DONACIONES</a></li>
+      </ul>
+  </nav>
+    <section>
+      <div class="contenedor">
+        <h2 id="titulo">Barrido de un LED</h2>
+        <h2 id="subtitulo">Descripción</h2>
+        <p id="texto_1">Este proyecto utiliza un Arduino para controlar un barrido de 10 LEDs. La velocidad del barrido se ajusta de forma gradual mediante un potenciómetro, permitiendo al usuario controlar la velocidad del efecto luminoso de manera intuitiva.</p>
+        <h3>Materiales necesarios:</h3>
+        <ul>
+          <li>Arduino Uno (u otra placa compatible)</li>
+          <li>10 LEDs</li>
+          <li>10 resistencias de 220 ohmios (o el valor adecuado para los LEDs que utilices)</li>
+          <li>Potenciómetro lineal de 10k ohmios</li>
+          <li>Protoboard y cables de conexión</li>
+        </ul>
+        <h3>Instrucciones:</h3>
+          <ol>
+             <li>Conecta los ánodos de los LEDs a los pines 2 al 11 de la protoboard.</li>
+             <li>Conecta los cátodos de los LEDs a tierra (GND) a través de las resistencias.</li>
+             <li>Conecta el terminal central del potenciómetro al pin analógico A0 del Arduino.</li>
+             <li>Conecta los terminales laterales del potenciómetro a 5V y GND del Arduino.</li>
+             <li>Carga el código en el Arduino.</li>
+             <li>Ajusta la velocidad del barrido girando el potenciómetro.</li>
+             <li>Observa cómo los LEDs se encienden y apagan en un barrido, con la velocidad controlada por el potenciómetro.</li>
+          </ol>
+          <h3>Esquema de conexión</h3>
+          <img src="../../images/esquema-barrido-led.png"> 
+          <h3>Código de Ejemplo (para Arduino IDE):</h3>
+          <div class="container">
+          <div class="controls">
+            <button onclick="copyCode()">Copiar</button>
+          </div>
+          <div class="code-container">
+            <div class="message" id="message">Copied</div>
+            <pre id="code-block" class="line-numbers"><code class="language-c" style="color: black;">
+/*
+  Creado: Luis  Alvarez (edualv1723@gmail.com)
+  https://alvelectronics.com
+*/
+
+// Definición de pines
+const int numLEDs = 10; // Número de LEDs
+const int potPin = A0;   // Pin del potenciómetro
+const int ledPins[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11}; // Pines de los LEDs
+
+// Variables
+int potValue = 0;
+
+void setup() {
+  // Inicialización de pines de los LEDs como salida
+  for (int i = 0; i &lt; numLEDs; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  // Lectura del valor del potenciómetro
+  potValue = analogRead(potPin);
+
+  // Mapeo del valor del potenciómetro al rango de LEDs
+  int ledLevel = map(potValue, 0, 1023, 0, numLEDs);
+
+  // Encender los LEDs progresivamente según el nivel del potenciómetro
+  for (int i = 0; i &lt; numLEDs; i++) {
+    if (i &lt; ledLevel) {
+      digitalWrite(ledPins[i], HIGH);
+    } else {
+      digitalWrite(ledPins[i], LOW);
+    }
+  }
+}
+
+      </code></pre>
+          </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script>
+           function copyCode() {
+                var codeBlock = document.getElementById('code-block').innerText;
+                navigator.clipboard.writeText(codeBlock).then(function() {
+                  showMessage();
+                }, function() {
+                  alert('Error al copiar el código');
+                });
+              }
+              function showMessage() {
+                var message = document.getElementById('message');
+                message.classList.add('show-message');
+                setTimeout(function() {
+                  message.classList.remove('show-message');
+                }, 1000);
+              } 
+      
+        </script>
+      </div>
+    </section>
+    <footer>
+        <p>Derechos de autor © 2024 - Luis Alvarez</p>
+    </footer>
+    <a href="https://wa.link/epa3e7" class="whatsapp-button" target="_blank">
+      <img src="../../images/boton_whatsapp.png" alt="Whatsapp">
+    </a>
+    <script src="js/script.js"></script> <!-- Asegúrate que la ruta refleja la estructura de carpetas -->
+</body>
+</html>

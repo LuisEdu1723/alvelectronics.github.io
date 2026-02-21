@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de tu página</title>
+    <link rel="stylesheet" href="../../css/proyectos/styles_termometro.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../../images/logo.png" alt="Descripción de la imagen" style="height: 100px;width: auto;">
+        </div>
+    </header>
+    <nav class="menu">
+      <ul class="nav-list">                  
+          <li><a href="../../index.html" class="inicio">INICIO</a></li>
+          <li><a href="../conceptos.html" class="conceptos">BLOGS</a></li>
+          <li><a href="../proyectos.html" class="proyectos">PROYECTOS</a></li>
+          <li> <a href="../servicios.html" class="servicios">SERVICIOS</a></li>
+          <li><a href="../descargas.html" class="descargas">DESCARGAS</a></li>
+          <li><a href="../donaciones.html" class="donaciones">DONACIONES</a></li>
+      </ul>
+  </nav>
+    <section>
+      <div class="contenedor">
+        <h2 id="titulo">Hola Mundo</h2>
+        <h2 id="subtitulo">Descripción</h2>
+        <p id="texto_1">Este es uno de los primeros programas para mostrar un mensaje desde cualquier navegador web. Consiste en la prueba de conexión del módulo ESP32 a internet, donde el dispositivo este enlazado a la red.
+          Como prueba de ello, se ingresará a la dirección Ip y se observará el mensaje </p>
+        <h3>Materiales necesarios:</h3>
+        <ul>
+          <li>ESP32 (cualquier versión)</li>
+          <li>Protoboard y cables de conexión</li>
+        </ul>
+        <h3>Instrucciones:</h3>
+          <ol>
+             <li>Conecta el cable miniusd al ordenador.</li>
+             <li>Instala el arduino y las librerias necesarias del ESP32.</li>
+             <li>Averigue el nombre de la red Wifi y la contraseña de su red Wifi.</li>
+             <li>En el código cambie el nombre de la red y la contraseña, tal como fue configurado en el router.</li>
+             <li>Verifique el puerto COM junto con su número.</li>
+             <li>Si desea cambiar el mensaje puede realizarlo si desea</li>
+             <li>Ejecute el programa y realice las pruebas de funcionamiento.</li>
+          </ol>
+          <h3>Esquema de conexión</h3>
+          <img src="../../images/esp32_holamundo.png"> 
+          <h3>Código de Ejemplo (para Arduino IDE):</h3>
+          <div class="container">
+          <div class="controls">
+            <button onclick="copyCode()">Copiar</button>
+          </div>
+          <div class="code-container">
+            <div class="message" id="message">Copied</div>
+            <pre id="code-block" class="line-numbers"><code class="language-c" style="color: black;">
+/*
+  Creado: Luis  Alvarez (edualv1723@gmail.com)
+  https://alvelectronics.com
+*/
+
+// ESP32 Web Server: Hello World!
+#include &lt;WiFi.h&gt;
+#include &lt;ESPAsyncWebServer.h&gt;
+
+// Replace with your network credentials
+const char* ssid = "YourWiFiSSID";
+const char* password = "YourWiFiPass";
+
+// Create a web server object on port 80
+AsyncWebServer server(80);
+// HTML webpage with inline CSS styling for icons and layout
+const char index_html[] PROGMEM = R"rawliteral(
+<!DOCTYPE html>
+<html lang="en">
+<body>
+Hello,world!
+</body>
+</html>
+)rawliteral";
+void setup() {
+  Serial.begin(9600);
+
+  // Connect to Wi-Fi
+  Serial.println("Connecting to Wi-Fi...");
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print(".");
+  }
+  Serial.println("\nWi-Fi connected!");
+  Serial.println("IP Address: ");
+  Serial.println(WiFi.localIP());
+
+  // Define the root URL handler
+ server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(200, "text/html", index_html);
+  });
+
+  // Start the server
+  server.begin();
+  Serial.println("Web server started.");
+}
+
+void loop() {
+ 
+}
+
+      </code></pre>
+          </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script>
+           function copyCode() {
+                var codeBlock = document.getElementById('code-block').innerText;
+                navigator.clipboard.writeText(codeBlock).then(function() {
+                  showMessage();
+                }, function() {
+                  alert('Error al copiar el código');
+                });
+              }
+              function showMessage() {
+                var message = document.getElementById('message');
+                message.classList.add('show-message');
+                setTimeout(function() {
+                  message.classList.remove('show-message');
+                }, 1000);
+              } 
+      
+        </script>
+      </div>
+    </section>
+    <footer>
+        <p>Derechos de autor © 2024 - Luis Alvarez</p>
+    </footer>
+    <a href="https://wa.link/epa3e7" class="whatsapp-button" target="_blank">
+      <img src="../../images/boton_whatsapp.png" alt="Whatsapp">
+    </a>
+    <script src="js/script.js"></script> <!-- Asegúrate que la ruta refleja la estructura de carpetas -->
+</body>
+</html>

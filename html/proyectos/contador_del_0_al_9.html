@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de tu página</title>
+    <link rel="stylesheet" href="../../css/proyectos/styles_termometro.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../../images/logo.png" alt="Descripción de la imagen" style="height: 100px;width: auto;">
+        </div>
+    </header>
+    <nav class="menu">
+      <ul class="nav-list">                  
+          <li><a href="../../index.html" class="inicio">INICIO</a></li>
+          <li><a href="../conceptos.html" class="conceptos">BLOGS</a></li>
+          <li><a href="../proyectos.html" class="proyectos">PROYECTOS</a></li>
+          <li> <a href="../servicios.html" class="servicios">SERVICIOS</a></li>
+          <li><a href="../descargas.html" class="descargas">DESCARGAS</a></li>
+          <li><a href="../donaciones.html" class="donaciones">DONACIONES</a></li>
+      </ul>
+  </nav>
+    <section>
+      <div class="contenedor">
+        <h2 id="titulo">Contador del 0 al 9</h2>
+        <h2 id="subtitulo">Descripción</h2>
+        <p id="texto_1">Este proyecto utiliza un Arduino para controlar un display de 7 segmentos de cátodo común, mostrando una secuencia de números del 0 al 9. Cada segmento del display está conectado a un pin específico en el Arduino, que activa los segmentos correspondientes para formar los dígitos. El display muestra cada número por un segundo antes de pasar al siguiente, creando una secuencia numérica continua visible en el display. Esta implementación es ideal para aprender sobre el control de displays de 7 segmentos y la programación de microcontroladores.</p>
+        <h3>Materiales necesarios:</h3>
+        <ul>
+          <li>Arduino Uno (u otra placa compatible)</li>
+          <li>Display 7 segmentos (Cátodo común)</li>
+          <li>7 Resistencias de 220 ohmios</li>
+          <li>Protoboard y cables de conexión</li>
+          <li>Fuente de alimentación para el Arduino</li>
+        </ul>
+        <h3>Instrucciones:</h3>
+          <ol>
+             <li>Conectar las resistencias como se ven el esquema</li>
+             <li>Revisar la disposición de los pines y conectar correctamente cada resistencia con su pin correspondiente. (La programación es solo display cátodo común)</li>
+             <li>Programar el Arduino teniendo los estados lógicos de las salidas digitales (Se recomienda crear Arrays y funciones)</li>
+             <li>Establecer un tiempo de retardo (por lo menos de 500ms)</li>
+             <li>Alimentar el Arduino y comprueba su funcionamiento.</li>
+          </ol>
+          <h3>Esquema de conexión</h3>
+          <img src="../../images/esquema_contador_al_9.png"> 
+          <h3>Código de Ejemplo (para Arduino IDE):</h3>
+          <div class="container">
+          <div class="controls">
+            <button onclick="copyCode()">Copiar</button>
+          </div>
+          <div class="code-container">
+            <div class="message" id="message">Copied</div>
+            <pre id="code-block" class="line-numbers"><code class="language-c" style="color: black;">
+/*
+  Creado: Luis  Alvarez (edualv1723@gmail.com)
+  https://alvelectronics.com
+*/
+const int SEGMENT_A = 2;
+const int SEGMENT_B = 3;
+const int SEGMENT_C = 4;
+const int SEGMENT_D = 5;
+const int SEGMENT_E = 6;
+const int SEGMENT_F = 7;
+const int SEGMENT_G = 8;
+
+// Definición de los patrones de cada dígito (0-9) para un display de cátodo común
+const byte DIGIT_PATTERNS[10] = {
+  B00111111, // 0
+  B00000110, // 1
+  B01011011, // 2
+  B01001111, // 3
+  B01100110, // 4
+  B01101101, // 5
+  B01111101, // 6
+  B00000111, // 7
+  B01111111, // 8
+  B01101111  // 9
+};
+
+void setup() {
+  // Configurar los pines de los segmentos como salidas
+  pinMode(SEGMENT_A, OUTPUT);
+  pinMode(SEGMENT_B, OUTPUT);
+  pinMode(SEGMENT_C, OUTPUT);
+  pinMode(SEGMENT_D, OUTPUT);
+  pinMode(SEGMENT_E, OUTPUT);
+  pinMode(SEGMENT_F, OUTPUT);
+  pinMode(SEGMENT_G, OUTPUT);
+}
+
+void loop() {
+  for (int number = 0; number &lt; 10; number++) {
+    displayNumber(number);
+    delay(1000); // Mostrar cada dígito durante 1 segundo
+  }
+}
+
+void displayNumber(int number) {
+  // Configurar los pines de los segmentos según el patrón del dígito
+  byte pattern = DIGIT_PATTERNS[number];
+  digitalWrite(SEGMENT_A, bitRead(pattern, 0));
+  digitalWrite(SEGMENT_B, bitRead(pattern, 1));
+  digitalWrite(SEGMENT_C, bitRead(pattern, 2));
+  digitalWrite(SEGMENT_D, bitRead(pattern, 3));
+  digitalWrite(SEGMENT_E, bitRead(pattern, 4));
+  digitalWrite(SEGMENT_F, bitRead(pattern, 5));
+  digitalWrite(SEGMENT_G, bitRead(pattern, 6));
+}
+
+      </code></pre>
+          </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script>
+           function copyCode() {
+                var codeBlock = document.getElementById('code-block').innerText;
+                navigator.clipboard.writeText(codeBlock).then(function() {
+                  showMessage();
+                }, function() {
+                  alert('Error al copiar el código');
+                });
+              }
+              function showMessage() {
+                var message = document.getElementById('message');
+                message.classList.add('show-message');
+                setTimeout(function() {
+                  message.classList.remove('show-message');
+                }, 1000);
+              } 
+      
+        </script>
+      </div>
+    </section>
+    <footer>
+        <p>Derechos de autor © 2024 - Luis Alvarez</p>
+    </footer>
+    <a href="https://wa.link/epa3e7" class="whatsapp-button" target="_blank">
+      <img src="../../images/boton_whatsapp.png" alt="Whatsapp">
+    </a>
+    <script src="js/script.js"></script> <!-- Asegúrate que la ruta refleja la estructura de carpetas -->
+</body>
+</html>

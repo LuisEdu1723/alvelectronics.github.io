@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos</title>
+    <link rel="stylesheet" href="../css/styles_proyectos.css"> <!-- Asegúrate que la ruta refleja la estructura de carpetas -->
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../images/logo.png" alt="Descripción de la imagen" style="height: 100px;width: auto;">
+        </div>
+    </header>
+    <nav class="menu">
+        <ul class="nav-list">                  
+            <li><a href="../index.html" class="inicio">INICIO</a></li>
+            <li><a href="conceptos.html" class="conceptos">BLOGS</a></li>
+            <li><a href="proyectos.html" class="proyectos">PROYECTOS</a></li>
+            <li> <a href="servicios.html" class="servicios">SERVICIOS</a></li>
+            <li><a href="descargas.html" class="descargas">DESCARGAS</a></li>
+            <li><a href="donaciones.html" class="donaciones">DONACIONES</a></li>
+        </ul>
+    </nav>
+    <section>
+        <div class="content_3">
+            <h2 id="titulo">Bienvenido al Mundo de la Electrónica</h2>
+            <p>¡Hola y bienvenido! Estás a punto de sumergirte en un emocionante viaje a través del fascinante mundo de la electrónica. Aquí en nuestro espacio, nos apasiona todo lo relacionado con la tecnología y la innovación. Desde proyectos básicos que puedes comenzar en tu mesa de cocina, hasta circuitos avanzados que te retarán y expandirán tus habilidades.</p>
+            <h2>¿Qué encontrarás aquí?</h2>
+            <div class="seccion-desplegable">
+               <div class="seccion-header" onclick="toggleSeccion('arduino')">
+                  <span class="con-punto"><strong>Arduino</strong></span>
+                  <span class="flecha" id="flecha-arduino">▼</span>
+               </div>
+               <p class="texto_1">Sumérgete en el universo de Arduino con proyectos que te llevarán desde encender tu primera LED hasta controlar dispositivos con tu smartphone.</p>
+            </div>
+           <div class="proyectos-arduino" id="proyectos-arduino">
+              <div class="proyecto-card">
+                <a href="../html/proyectos/parpadeo_de_un_led.html" class="proyecto-link">
+                  <img src="../images/esquema_parpadeo.png" alt="Parpadeo de un led">
+                  <span class="proyecto-titulo">Parpadeo de un led</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/barrido_led.html" class="proyecto-link">
+                  <img src="../images/esquema-barrido-led.png" alt="Barrido Led">
+                  <span class="proyecto-titulo">Barrido Led</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/luces_auto_fantastico.html" class="proyecto-link">
+                  <img src="../images/esquema_luces_auto_fantastico.png" alt="Luces Auto Fantastico">
+                  <span class="proyecto-titulo">Luces Auto Fantastico</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/led_RGB.html" class="proyecto-link">
+                  <img src="../images/esquema_led_rgb.png" alt="Led RGB">
+                  <span class="proyecto-titulo">Led RGB</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/termometro_digital.html" class="proyecto-link">
+                  <img src="../images/esquema_temperatura.png" alt="Termometro Digital">
+                  <span class="proyecto-titulo">Termometro Digital</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/voltimetro_digital.html" class="proyecto-link">
+                  <img src="../images/esquema_voltimetro.png" alt="Voltimetro Digital">
+                  <span class="proyecto-titulo">Voltimetro Digital</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/contador_del_0_al_9.html" class="proyecto-link">
+                  <img src="../images/esquema_contador_al_9.png" alt="Contador del 0 al 9">
+                  <span class="proyecto-titulo">Contador del 0 al 9</span>
+                </a>
+              </div>
+           </div>
+             
+           <div class="seccion-desplegable">
+              <div class="seccion-header" onclick="toggleSeccion('esp32')">
+                 <span class="con-punto"><strong>ESP32</strong></span>
+                 <span class="flecha" id="flecha-esp32">▼</span>
+              </div>
+              <p class="texto_2">
+                Explora las capacidades de IoT con el potente y versátil ESP32, donde podrás crear aplicaciones que interactúan con internet y mucho más.
+              </p>
+           </div>
+           <div class="proyectos-esp32" id="proyectos-esp32">
+              <div class="proyecto-card">
+                <a href="../html/proyectos/hola_mundo.html" class="proyecto-link">
+                  <img src="../images/esp32_holamundo.png" alt="Hola mundo">
+                  <span class="proyecto-titulo">Hola mundo</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/control_led_wifi.html" class="proyecto-link">
+                  <img src="../images/esp32_control_led_wifi.png" alt="Control de led por Wifi">
+                  <span class="proyecto-titulo">Control de led por Wifi</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/sensor_dh11.html" class="proyecto-link">
+                  <img src="../images/esp32_dht11.png" alt="Medición de humedad">
+                  <span class="proyecto-titulo">Medición de humedad</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/control_led_rgb_wifi.html" class="proyecto-link">
+                  <img src="../images/esp32_control_led_rgb.png" alt="Control LED RGB">
+                  <span class="proyecto-titulo">Control LED RGB</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/dimmer_wifi.html" class="proyecto-link">
+                  <img src="../images/esp32_dimmer.png" alt="Dimmer Controlado por Wifi">
+                  <span class="proyecto-titulo">Dimmer Controlado por Wifi</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/control_acceso_wifi.html" class="proyecto-link">
+                  <img src="../images/esquema_control_wifi.png" alt="Control de acceso por Wifi">
+                  <span class="proyecto-titulo">Control de acceso por Wifi</span>
+                </a>
+              </div>
+              <div class="proyecto-card">
+                <a href="../html/proyectos/servomotor_wifi.html" class="proyecto-link">
+                  <img src="../images/esp32_servomotor.png" alt="Control de servomotor por Wifi">
+                  <span class="proyecto-titulo">Control de servomotor por Wifi</span>
+                </a>
+              </div>
+           </div>
+
+        </div>
+      </section>
+    <footer>
+        <p>Derechos de autor - Luis Alvarez</p>
+    </footer>
+    <a href="https://wa.link/epa3e7" class="whatsapp-button" target="_blank">
+        <img src="../images/boton_whatsapp.png" alt="Whatsapp">
+    </a>
+    <script>
+        function toggleSeccion(seccion) {
+            var proyectos = document.getElementById('proyectos-' + seccion);
+            var flecha = document.getElementById('flecha-' + seccion);
+            
+            if (proyectos.classList.contains('oculto')) {
+                proyectos.classList.remove('oculto');
+                flecha.textContent = '▼';
+            } else {
+                proyectos.classList.add('oculto');
+                flecha.textContent = '▶';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('proyectos-arduino').classList.add('oculto');
+            document.getElementById('proyectos-esp32').classList.add('oculto');
+            document.getElementById('flecha-arduino').textContent = '▶';
+            document.getElementById('flecha-esp32').textContent = '▶';
+        });
+    </script>
+</body>
+</html>

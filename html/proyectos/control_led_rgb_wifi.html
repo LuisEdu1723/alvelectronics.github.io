@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de tu página</title>
+    <link rel="stylesheet" href="../../css/proyectos/styles_termometro.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../../images/logo.png" alt="Descripción de la imagen" style="height: 100px;width: auto;">
+        </div>
+    </header>
+    <nav class="menu">
+      <ul class="nav-list">                  
+          <li><a href="../../index.html" class="inicio">INICIO</a></li>
+          <li><a href="../conceptos.html" class="conceptos">BLOGS</a></li>
+          <li><a href="../proyectos.html" class="proyectos">PROYECTOS</a></li>
+          <li> <a href="../servicios.html" class="servicios">SERVICIOS</a></li>
+          <li><a href="../descargas.html" class="descargas">DESCARGAS</a></li>
+          <li><a href="../donaciones.html" class="donaciones">DONACIONES</a></li>
+      </ul>
+  </nav>
+    <section>
+      <div class="contenedor">
+        <h2 id="titulo">Control de un led por RGB</h2>
+        <h2 id="subtitulo">Descripción</h2>
+        <p id="texto_1">En este proyecto se tiene como objetivo la de controlar un led mediante los pines RGB, donde se tiene la intensidad de los led Rojo, Verde y Azul integrados en un solo led. </p>
+        <h3>Materiales necesarios:</h3>
+        <ul>
+          <li>ESP32 (cuaqluier versión)</li>
+          <li>LED RGB</li>
+          <li>3 Resistencias de 220 ohmios</li>
+          <li>Cable mini-usb</li>
+          <li>Protoboard y cables de conexión</li>
+        </ul>
+        <h3>Instrucciones:</h3>
+          <ol>
+             <li>Conecta los ánodos del led RGB a los pines GPIO 14 (R), GPIO 12 (G), GPIO 27 (B).</li>
+             <li>Conecta el cátodo al pin GND.</li>
+             <li>Coloque el nombre la red y contraseña.</li>
+             <li>Carga el código en el Arduino.</li>
+             <li>Revise el monitor serial, compruebe la conexión y copie la dirección IP .</li>
+             <li>Ingrese al navegador, pegue la dirección IP y disfrute.</li>
+          </ol>
+          <h3>Esquema de conexión</h3>
+          <img src="../../images/esp32_control_led_rgb.png"> 
+          <h3>Código de Ejemplo (para Arduino IDE):</h3>
+          <div class="container">
+          <div class="controls">
+            <button onclick="copyCode()">Copiar</button>
+          </div>
+          <div class="code-container">
+            <div class="message" id="message">Copied</div>
+            <pre id="code-block" class="line-numbers"><code class="language-c" style="color: black;">
+/*
+  Creado: Luis  Alvarez (edualv1723@gmail.com)
+  https://alvelectronics.com
+*/
+
+#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+
+const char* ssid = "TuSSID";      
+const char* password = "TuPassword";
+
+WebServer server(80);
+
+// Pines RGB
+const int redPin = 14;
+const int greenPin = 12;
+const int bluePin = 27;
+
+void setColor(int r, int g, int b) {
+  // Para LED Ánodo Común → invertir valor PWM
+  ledcWrite(0, 255 - r);
+  ledcWrite(1, 255 - g);
+  ledcWrite(2, 255 - b);
+}
+
+void handleRoot() {
+  String html = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Control RGB</title></head><body>";
+  html += "<h1>Control de LED RGB - ESP32</h1>";
+  html += "<input type='color' id='colorPicker' value='#ffffff' onchange='sendColor()'>";
+  html += "<script>";
+  html += "function sendColor(){";
+  html += "let color=document.getElementById('colorPicker').value;";
+  html += "fetch('/setColor?hex='+color);";
+  html += "}";
+  html += "</script></body></html>";
+  server.send(200, "text/html", html);
+}
+
+void handleSetColor() {
+  if (server.hasArg("hex")) {
+    String hex = server.arg("hex");
+    long number = strtol(&hex[1], NULL, 16);
+    int r = number >> 16;
+    int g = (number >> 8) & 0xFF;
+    int b = number & 0xFF;
+    setColor(r, g, b);
+    Serial.printf("Color: R=%d, G=%d, B=%d\n", r, g, b);
+  }
+  server.send(200, "text/plain", "Color cambiado");
+}
+
+void setup() {
+  Serial.begin(115200);
+
+  // Configurar PWM en 3 canales
+  ledcSetup(0, 5000, 8);
+  ledcSetup(1, 5000, 8);
+  ledcSetup(2, 5000, 8);
+
+  ledcAttachPin(redPin, 0);
+  ledcAttachPin(greenPin, 1);
+  ledcAttachPin(bluePin, 2);
+
+  setColor(0, 0, 0); // Apagado inicial
+
+  WiFi.begin(ssid, password);
+  Serial.print("Conectando a WiFi");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println();
+  Serial.print("Conectado, IP: ");
+  Serial.println(WiFi.localIP());
+
+  server.on("/", handleRoot);
+  server.on("/setColor", handleSetColor);
+
+  server.begin();
+  Serial.println("Servidor HTTP iniciado");
+}
+
+void loop() {
+  server.handleClient();
+}
+
+
+      </code></pre>
+          </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <script>
+           function copyCode() {
+                var codeBlock = document.getElementById('code-block').innerText;
+                navigator.clipboard.writeText(codeBlock).then(function() {
+                  showMessage();
+                }, function() {
+                  alert('Error al copiar el código');
+                });
+              }
+              function showMessage() {
+                var message = document.getElementById('message');
+                message.classList.add('show-message');
+                setTimeout(function() {
+                  message.classList.remove('show-message');
+                }, 1000);
+              } 
+      
+        </script>
+      </div>
+    </section>
+    <footer>
+        <p>Derechos de autor © 2024 - Luis Alvarez</p>
+    </footer>
+    <a href="https://wa.link/epa3e7" class="whatsapp-button" target="_blank">
+      <img src="../../images/boton_whatsapp.png" alt="Whatsapp">
+    </a>
+    <script src="js/script.js"></script> <!-- Asegúrate que la ruta refleja la estructura de carpetas -->
+</body>
+</html>
